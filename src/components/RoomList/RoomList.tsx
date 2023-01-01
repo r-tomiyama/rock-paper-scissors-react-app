@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box } from '@chakra-ui/react'
 import { Room } from './parts';
+import { useRooms } from '../../hooks/firestore/useRooms';
+import { Room as RoomType } from "../../services/firestore/types/Room" 
 
 export const RoomList: React.FC = () => {
-  const rooms = [
-    {id: "id1", name: "部屋1"},
-    {id: "id2", name: "部屋2"},
-    {id: "id3", name: "部屋3"}
-  ];
+  const [rooms, setRooms] = useState<RoomType[]>();
+  useEffect(() => {
+    const fetchRooms = async () => {
+      const { rooms } = await useRooms();
+      setRooms(rooms);
+    }
+    fetchRooms();
+  })
 
   return (
     <Box>
-      {rooms.map(r => <Room key={r.id} name={r.name} />)}
+      {rooms && rooms.map((r, i) => <Room key={i} name={r.name} />)}
     </Box>
   )
 }
