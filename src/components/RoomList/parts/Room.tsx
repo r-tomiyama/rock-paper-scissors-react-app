@@ -10,15 +10,19 @@ import {
   Text,
 } from '@chakra-ui/react';
 
+import { Room as RoomData } from '@/hooks/database/useRooms';
+
 type Prop = {
-  name: string;
+  roomData: RoomData;
 };
 
-export const Room: React.FC<Prop> = ({ name }) => {
+export const Room: React.FC<Prop> = ({ roomData }) => {
   return (
     <Card>
       <CardHeader>
-        <Heading size='md'>{name}</Heading>
+        <Heading size='md'>
+          {roomData.id}: {roomData.name}
+        </Heading>
       </CardHeader>
       <CardBody>
         <Stack divider={<StackDivider />} spacing='4'>

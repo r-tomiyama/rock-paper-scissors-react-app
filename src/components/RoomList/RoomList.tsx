@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 
 import { Room } from './parts';
-import { useRooms } from '@/hooks/firestore/useRooms';
+import { useRooms } from '@/hooks/database/useRooms';
 import { Spinner } from '@/sharedComponents';
 
 export const RoomList: React.FC = () => {
@@ -13,8 +13,8 @@ export const RoomList: React.FC = () => {
         <Spinner />
       ) : (
         <Box>
-          {rooms.map((r, i) => (
-            <Room key={i} name={r.name} />
+          {rooms.map((r) => (
+            <Room key={r.id} roomData={r} />
           ))}
         </Box>
       )}
