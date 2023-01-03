@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { Room, Top } from './pages';
+import { NotFound } from './pages/NotFound/NotFound';
 
 export const router = createBrowserRouter([
   {
@@ -8,7 +9,15 @@ export const router = createBrowserRouter([
     element: <Top />,
   },
   {
-    path: '/room/:id',
+    path: '/rooms',
+    element: <Top />,
+  },
+  {
+    path: '/rooms/:id',
     element: <Room />,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ]);

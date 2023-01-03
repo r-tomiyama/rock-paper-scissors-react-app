@@ -9,6 +9,7 @@ import {
   StackDivider,
   Text,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 import { Room as RoomData } from '@/hooks/database/useRooms';
 
@@ -17,8 +18,10 @@ type Prop = {
 };
 
 export const Room: React.FC<Prop> = ({ roomData }) => {
+  const navigate = useNavigate();
+
   return (
-    <Card>
+    <Card onClick={() => navigate(`/rooms/${roomData.id}`)}>
       <CardHeader>
         <Heading size='md'>
           {roomData.id}: {roomData.name}
