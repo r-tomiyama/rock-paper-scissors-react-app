@@ -1,16 +1,14 @@
 import React from 'react';
-import {
-  createBrowserRouter,
-} from "react-router-dom";
-import { Room, Top } from "./pages";
+import { createBrowserRouter } from 'react-router-dom';
+import { Room, Top } from './pages';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Top />,
   },
   {
-    path: "/room/:id",
+    path: '/room/:id',
     element: <Room />,
   },
 ]);

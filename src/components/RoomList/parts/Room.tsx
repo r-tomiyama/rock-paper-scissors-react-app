@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Box,
   Card,
@@ -7,12 +7,12 @@ import {
   Heading,
   Stack,
   StackDivider,
-  Text
-} from '@chakra-ui/react'
+  Text,
+} from '@chakra-ui/react';
 
 type Prop = {
   name: string;
-}
+};
 
 export const Room: React.FC<Prop> = ({ name }) => {
   return (
@@ -33,5 +33,5 @@ export const Room: React.FC<Prop> = ({ name }) => {
         </Stack>
       </CardBody>
     </Card>
-  )
-}
+  );
+};
