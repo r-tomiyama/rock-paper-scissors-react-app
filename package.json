@@ -7,9 +7,12 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint \"./src/**/*.{ts,tsx}\"",
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint \"./src/**/*.{ts,tsx}\"",
     "lint:prettier": "prettier \"./src/**/*.{ts,tsx}\" --check",
-    "fix": "eslint \"./src/**/*.{ts,tsx}\" --fix",
+    "lint:type": "tsc --noEmit",
+    "fix": "run-p fix:*",
+    "fix:eslint": "eslint \"./src/**/*.{ts,tsx}\" --fix",
     "fix:prettier": "prettier \"./src/**/*.{ts,tsx}\" --write"
   },
   "dependencies": {
@@ -33,6 +36,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-react": "^7.31.11",
     "firebase": "^9.13.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.8.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.0"
