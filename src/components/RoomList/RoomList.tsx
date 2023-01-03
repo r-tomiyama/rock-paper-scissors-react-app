@@ -11,7 +11,7 @@ export const RoomList: React.FC = () => {
       const { rooms } = await useRooms();
       setRooms(rooms);
     }
-    fetchRooms();
+    void fetchRooms();
   })
 
   return (

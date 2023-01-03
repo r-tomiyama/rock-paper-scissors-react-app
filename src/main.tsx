@@ -4,7 +4,8 @@ import { RouterProvider } from 'react-router-dom'
 import { ChakraProvider } from '@chakra-ui/react'
 import { router } from './router'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+const root = document.getElementById('root') as HTMLElement;
+ReactDOM.createRoot(root).render(
   <React.StrictMode>
     <ChakraProvider>
       <RouterProvider router={router} />
