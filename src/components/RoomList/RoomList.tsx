@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 
 import { Room } from './parts';
-import { useRooms } from '@/hooks/database/useRooms';
+import { useRooms } from '@/components/RoomList/hooks';
 import { Spinner } from '@/sharedComponents';
 
 export const RoomList: React.FC = () => {

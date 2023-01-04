@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
-import { Room as RoomData } from '@/hooks/database/useRooms';
+import { Room as RoomData } from '@/components/RoomList/hooks/useRooms';
 
 type Prop = {
   roomData: RoomData;

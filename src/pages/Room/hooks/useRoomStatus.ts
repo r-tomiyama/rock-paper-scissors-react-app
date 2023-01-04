@@ -1,4 +1,4 @@
-import { Room } from '@/hooks/database/useRoom';
+import { Room } from '@/pages/Room/hooks';
 
 export type Status = 'WAITING' | 'PLAYING' | 'FINISHED';
 

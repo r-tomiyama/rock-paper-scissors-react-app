@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, Text } from '@chakra-ui/react';
-import { Room } from '@/hooks/database/useRoom';
+import { Room } from '@/pages/Room/hooks';
 
 type Prop = {
   room: Room;

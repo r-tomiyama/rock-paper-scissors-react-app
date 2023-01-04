@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { Center, Text } from '@chakra-ui/react';
 
-import { useRoom } from '@/hooks/database/useRoom';
+import { useRoom } from '@/pages/Room/hooks';
 import { Spinner } from '@/sharedComponents';
 import { PlayingRoom } from '@/components/PlayingRoom';
 import { Status, useRoomStatus } from './hooks/useRoomStatus';
