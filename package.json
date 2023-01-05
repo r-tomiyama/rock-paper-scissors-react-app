@@ -24,13 +24,16 @@
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.41.5",
     "react-router-dom": "^6.6.1",
     "sort-by": "^0.0.2",
-    "swr": "^2.0.0"
+    "swr": "^2.0.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
+    "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "eslint": "^8.31.0",
