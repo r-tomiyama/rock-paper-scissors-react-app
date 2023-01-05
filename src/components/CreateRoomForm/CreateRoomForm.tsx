@@ -14,11 +14,13 @@ import {
   ModalOverlay,
   useDisclosure,
   Text,
+  Spinner,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { usePlayer } from '@/providers/PlayerProvider';
+import { useCreateRoom } from './hooks';
 
 type FormInputs = {
   userName: string;
@@ -32,6 +34,7 @@ export const CreateRoomForm: React.FC = () => {
   const { register, handleSubmit, formState, reset, setValue } = useForm<FormInputs>({
     mode: 'onChange',
   });
+  const { trigger, isMutating } = useCreateRoom();
 
   useEffect(() => {
     if (player.name) {
@@ -44,11 +47,11 @@ export const CreateRoomForm: React.FC = () => {
     onClose();
   }, []);
 
-  const submit = (data: FormInputs) => {
+  const submit = async (data: FormInputs) => {
     setName(data.userName);
-    // TODO: createRoom
-    const roomId = 'test';
-    navigate(`rooms/${roomId}`);
+    await trigger({ name: data.roomName }).then((roomId) => {
+      if (roomId) navigate(`/rooms/${roomId}`);
+    });
   };
 
   return (
@@ -100,7 +103,7 @@ export const CreateRoomForm: React.FC = () => {
                 disabled={!formState.isValid}
                 isLoading={formState.isSubmitting}
               >
-                作成
+                {!isMutating ? '作成' : <Spinner />}
               </Button>
               <Button mr={3} onClick={cancel}>
                 戻る
