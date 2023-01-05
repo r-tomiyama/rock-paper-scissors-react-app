@@ -14,7 +14,6 @@ import {
   ModalOverlay,
   useDisclosure,
   Text,
-  Spinner,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -57,7 +56,9 @@ export const CreateRoomForm: React.FC = () => {
   return (
     <>
       <Box>
-        <Button onClick={onOpen}>ルームを作る</Button>
+        <Button onClick={onOpen} size='lg' colorScheme='blue' py='6vh' borderRadius={'6vh'}>
+          ルームを作ってじゃんけんする！
+        </Button>
       </Box>
 
       <Modal isOpen={isOpen} onClose={cancel} size='lg'>
@@ -71,7 +72,7 @@ export const CreateRoomForm: React.FC = () => {
             <ModalCloseButton />
 
             <ModalBody>
-              <FormControl>
+              <FormControl pb='5vh'>
                 <FormLabel>ルーム名</FormLabel>
                 <Input
                   placeholder='ルーム名'
@@ -82,7 +83,7 @@ export const CreateRoomForm: React.FC = () => {
                 />
                 <Text color='red'>{formState.errors.roomName?.message}</Text>
               </FormControl>
-              <FormControl>
+              <FormControl pb='5vh'>
                 <FormLabel>ユーザーネーム</FormLabel>
                 <Input
                   placeholder='ユーザーネーム'
@@ -101,9 +102,9 @@ export const CreateRoomForm: React.FC = () => {
                 mr={3}
                 type='submit'
                 disabled={!formState.isValid}
-                isLoading={formState.isSubmitting}
+                isLoading={formState.isSubmitting || isMutating}
               >
-                {!isMutating ? '作成' : <Spinner />}
+                作成
               </Button>
               <Button mr={3} onClick={cancel}>
                 戻る

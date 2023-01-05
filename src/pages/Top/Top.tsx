@@ -3,11 +3,14 @@ import './style.css';
 
 import { RoomList } from '@/components/RoomList';
 import { CreateRoomForm } from '@/components/CreateRoomForm';
+import { Center } from '@chakra-ui/react';
 
 export const Top: React.FC = () => {
   return (
     <>
-      <CreateRoomForm />
+      <Center mb='10vh'>
+        <CreateRoomForm />
+      </Center>
       <RoomList />
     </>
   );

@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Card,
-  CardHeader,
-  CardBody,
-  Heading,
-  Stack,
-  StackDivider,
-  Text,
-} from '@chakra-ui/react';
+import { Card, CardHeader, Heading, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 import { Room as RoomData } from '@/components/RoomList/hooks/useRooms';
@@ -22,23 +13,19 @@ export const Room: React.FC<Prop> = ({ roomData }) => {
 
   return (
     <Card onClick={() => navigate(`/rooms/${roomData.id}`)}>
-      <CardHeader>
-        <Heading size='md'>
-          {roomData.id}: {roomData.name}
-        </Heading>
+      <CardHeader p='3'>
+        <Heading size='sm'>{roomData.name}</Heading>
+        <Text fontSize='xx-small' color={'gray.500'}>
+          {roomData.id}
+        </Text>
       </CardHeader>
-      <CardBody>
-        <Stack divider={<StackDivider />} spacing='4'>
-          <Box>
-            <Heading size='xs' textTransform='uppercase'>
-              Summary
-            </Heading>
-            <Text pt='2' fontSize='sm'>
-              View a summary of all your clients over the last month.
-            </Text>
-          </Box>
-        </Stack>
-      </CardBody>
+      {/* TODO: 参加者一覧を出す */}
+      {/* <CardBody p='3'>
+        <Box>
+          <Heading size='xs'>参加者</Heading>
+          <Text pt='2' fontSize='sm'></Text>
+        </Box>
+      </CardBody> */}
     </Card>
   );
 };
