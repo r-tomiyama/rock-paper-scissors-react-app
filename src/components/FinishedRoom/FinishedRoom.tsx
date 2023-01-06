@@ -2,8 +2,9 @@ import React, { useCallback } from 'react';
 import { Box, Button, Text } from '@chakra-ui/react';
 import { Room } from '@/pages/Room/hooks';
 import { Game } from '@/pages/Room/hooks/useRoom/types';
-import { useCreateNextGame, useGameResult } from './hooks';
+import { useCreateNextGame } from './hooks';
 import { usePlayer } from '@/providers/PlayerProvider';
+import { ResultMessage } from './parts/ResultMessage';
 
 type Prop = {
   room: Room;
@@ -11,7 +12,6 @@ type Prop = {
 };
 
 export const FinishedRoom: React.FC<Prop> = ({ room, game }) => {
-  const { result } = useGameResult(game);
   const { trigger, isMutating } = useCreateNextGame();
   const { player } = usePlayer();
 
@@ -21,13 +21,7 @@ export const FinishedRoom: React.FC<Prop> = ({ room, game }) => {
 
   return (
     <Box>
-      <Text>
-        {room.id}: {room.name}
-      </Text>
-      <Box>
-        <Text>結果</Text>
-        <Text>{result}</Text>
-      </Box>
+      <ResultMessage game={game} />
       <Box>
         <Button
           isLoading={isMutating}

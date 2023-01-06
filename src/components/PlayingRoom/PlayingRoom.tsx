@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, Button, Text } from '@chakra-ui/react';
 import { Room } from '@/pages/Room/hooks';
 import { Game } from '@/pages/Room/hooks/useRoom/types';
 import { useSelectHand } from './hooks';
@@ -26,12 +26,12 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
     <Box>
       {/* TODO: 閲覧者の人数を表示する */}
       {/* TODO: プレイヤーではない場合、閲覧モードにする */}
-      <Text>
-        {room.id}: {room.name}
-      </Text>
       {game.playerSeat && (
         <Box>
-          <Text>手を選んでください</Text>
+          <Alert status='info'>
+            <AlertIcon />
+            手を選んでください!
+          </Alert>
           <Box>
             <Button
               bg={selectedHand === 'ROCK' ? 'red' : 'gray.100'}

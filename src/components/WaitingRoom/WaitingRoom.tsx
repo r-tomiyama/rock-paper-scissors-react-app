@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, Center, Text } from '@chakra-ui/react';
 import { Room } from '@/pages/Room/hooks';
 import { JoinGameForm } from '@/components/JoinGameForm';
 import { Game } from '@/pages/Room/hooks/useRoom/types';
@@ -12,16 +12,14 @@ type Prop = {
 export const WaitingRoom: React.FC<Prop> = ({ room, game }) => {
   return (
     <Box>
-      <Text>
-        {room.id}: {room.name}
-      </Text>
-      <Box>
-        <Text>メンバーが揃うのを待っています</Text>
-      </Box>
+      <Alert status='info'>
+        <AlertIcon />
+        メンバーが揃うのを待っています!
+      </Alert>
       {!game.playerSeat && (
-        <Box>
+        <Center py='10vh'>
           <JoinGameForm roomId={room.id} playingGame={game} />
-        </Box>
+        </Center>
       )}
     </Box>
   );

@@ -8,7 +8,7 @@ import { Center } from '@chakra-ui/react';
 export const Top: React.FC = () => {
   return (
     <>
-      <Center mb='10vh'>
+      <Center pt='15vh' mb='10vh'>
         <CreateRoomForm />
       </Center>
       <RoomList />

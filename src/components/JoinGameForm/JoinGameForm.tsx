@@ -57,7 +57,7 @@ export const JoinGameForm: React.FC<Prop> = ({ roomId, playingGame }) => {
   return (
     <>
       <Button onClick={onOpen} size='lg' colorScheme='blue' py='6vh' borderRadius={'6vh'}>
-        参加する！
+        じゃんけんに参加する！
       </Button>
 
       <Modal isOpen={isOpen} onClose={cancel} size='lg'>
