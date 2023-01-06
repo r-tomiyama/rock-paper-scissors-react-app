@@ -12,9 +12,14 @@ export type RoomHistory = {
   id: string;
 } & RoomHistoryData;
 
+export type Game = {
+  playerSeat?: Seat;
+} & RoomHistory;
+
 export type SetHistories = (_r: Room, _hs: RoomHistory[]) => void;
 
 export type Result = {
   room?: Room;
+  game?: Game;
   isValidating: boolean;
 };

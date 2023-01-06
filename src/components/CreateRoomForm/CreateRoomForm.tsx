@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
 import {
-  Box,
   Button,
   FormControl,
   FormLabel,
@@ -48,18 +47,16 @@ export const CreateRoomForm: React.FC = () => {
 
   const submit = async (data: FormInputs) => {
     setName(data.userName);
-    await trigger({ name: data.roomName }).then((roomId) => {
+    await trigger({ room: { name: data.roomName }, playerId: player.id }).then((roomId) => {
       if (roomId) navigate(`/rooms/${roomId}`);
     });
   };
 
   return (
     <>
-      <Box>
-        <Button onClick={onOpen} size='lg' colorScheme='blue' py='6vh' borderRadius={'6vh'}>
-          ルームを作ってじゃんけんする！
-        </Button>
-      </Box>
+      <Button onClick={onOpen} size='lg' colorScheme='blue' py='6vh' borderRadius={'6vh'}>
+        ルームを作ってじゃんけんする！
+      </Button>
 
       <Modal isOpen={isOpen} onClose={cancel} size='lg'>
         <ModalOverlay />

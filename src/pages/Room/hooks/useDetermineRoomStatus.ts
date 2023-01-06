@@ -1,4 +1,4 @@
-import { RoomHistory } from '@/services/firestore/types/RoomHistory';
+import { RoomHistory } from './useRoom/types';
 
 export type Status = 'WAITING' | 'PLAYING' | 'FINISHED';
 

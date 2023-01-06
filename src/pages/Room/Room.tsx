@@ -10,21 +10,21 @@ import { FinishedRoom } from '@/components/FinishedRoom';
 
 export const Room: React.FC = () => {
   const { id } = useParams();
-  const { room, isValidating } = useRoom(id);
+  const { room, game, isValidating } = useRoom(id);
 
   const renderRoom = useMemo(() => {
-    if (typeof room === 'undefined') {
+    if (typeof room === 'undefined' || typeof game === 'undefined') {
       return <></>;
     }
     switch (room.status) {
       case 'WAITING':
-        return <WaitingRoom room={room} />;
+        return <WaitingRoom room={room} game={game} />;
       case 'PLAYING':
         return <PlayingRoom room={room} />;
       case 'FINISHED':
         return <FinishedRoom room={room} />;
     }
-  }, [room?.status]);
+  }, [room?.status, game]);
 
   return (
     <>
