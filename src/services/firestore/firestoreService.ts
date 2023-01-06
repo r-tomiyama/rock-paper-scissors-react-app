@@ -10,3 +10,5 @@ export const roomDoc = (documentId: string) =>
 
 export const roomHistoriesCollection = (documentId: string) =>
   collection(db, 'rooms', documentId, 'histories').withConverter(historyConverter);
+export const roomHistoryDoc = (arg: { roomId: string; documentId: string }) =>
+  doc(db, 'rooms', arg.roomId, 'histories', arg.documentId).withConverter(historyConverter);

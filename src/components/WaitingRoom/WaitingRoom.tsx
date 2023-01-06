@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { Room } from '@/pages/Room/hooks';
+import { JoinGameForm } from '@/components/JoinGameForm';
 import { Game } from '@/pages/Room/hooks/useRoom/types';
 
 type Prop = {
@@ -19,9 +20,7 @@ export const WaitingRoom: React.FC<Prop> = ({ room, game }) => {
       </Box>
       {!game.playerSeat && (
         <Box>
-          {/* TODO: 参加時に、名前を設定する */}
-          {/* TODO: 参加する際に、新しいhistoryを積む */}
-          <Button>参加します</Button>
+          <JoinGameForm roomId={room.id} playingGame={game} />
         </Box>
       )}
     </Box>
