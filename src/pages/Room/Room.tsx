@@ -22,7 +22,7 @@ export const Room: React.FC = () => {
       case 'PLAYING':
         return <PlayingRoom room={room} game={game} />;
       case 'FINISHED':
-        return <FinishedRoom room={room} />;
+        return <FinishedRoom room={room} game={game} />;
     }
   }, [room?.status, game]);
 
