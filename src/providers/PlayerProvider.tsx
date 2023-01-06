@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 type Player = {
-  id?: string;
+  id: string;
   name?: string;
 };
 
@@ -12,7 +12,8 @@ type PlayerContextType = {
   setName: (_v: string) => void;
 };
 const PlayerContext = createContext<PlayerContextType>({
-  player: {},
+  // dummy
+  player: { id: '' },
   setId: (_v) => {
     void 0;
   },
@@ -22,7 +23,7 @@ const PlayerContext = createContext<PlayerContextType>({
 });
 
 export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [player, setPlayer] = useState<Player>({});
+  const [player, setPlayer] = useState<Partial<Player>>({});
 
   const setId = (id: string) => {
     setPlayer({ ...player, id });
@@ -39,7 +40,7 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       setId(playerId);
     } else {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-      const newId = uuidv4() as string;
+      const newId = uuidv4();
       setId(newId);
     }
   }, []);
@@ -51,8 +52,18 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   }, []);
 
+  const getPlayer = (): Player => {
+    if (!player.id) {
+      const newId = uuidv4();
+      setId(newId);
+    }
+    return { ...player, id: player.id as string };
+  };
+
   return (
-    <PlayerContext.Provider value={{ player, setId, setName }}>{children}</PlayerContext.Provider>
+    <PlayerContext.Provider value={{ player: getPlayer(), setId, setName }}>
+      {children}
+    </PlayerContext.Provider>
   );
 };
 
