@@ -1,9 +1,11 @@
 import { getDoc } from 'firebase/firestore';
 
 import { roomDoc } from '@/services/firestore/firestoreService';
-import { Room } from './types';
+import { Room } from '@/services/firestore/types/Room';
 
-export const fetcher = async ([_k, documentId]: [string, string]): Promise<Room | undefined> => {
+export const fetcher = async ([_k, documentId]: [string, string]): Promise<
+  (Room & { id: string }) | undefined
+> => {
   const roomSnapshot = await getDoc(roomDoc(documentId));
   const room = roomSnapshot.data();
 
@@ -11,5 +13,5 @@ export const fetcher = async ([_k, documentId]: [string, string]): Promise<Room 
     return undefined;
   }
 
-  return { id: roomSnapshot.id, ...room, histories: [] };
+  return { id: roomSnapshot.id, ...room };
 };

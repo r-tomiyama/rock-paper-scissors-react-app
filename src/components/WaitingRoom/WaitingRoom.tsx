@@ -15,9 +15,13 @@ export const WaitingRoom: React.FC<Prop> = ({ room }) => {
       <Box>
         <Text>メンバーが揃うのを待っています</Text>
       </Box>
-      <Box>
-        <Button>参加します</Button>
-      </Box>
+      {!room.playerSeat && (
+        <Box>
+          {/* TODO: 参加時に、名前を設定する */}
+          {/* TODO: 参加する際に、新しいhistoryを積む */}
+          <Button>参加します</Button>
+        </Box>
+      )}
     </Box>
   );
 };

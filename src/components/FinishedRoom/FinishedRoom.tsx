@@ -14,8 +14,10 @@ export const FinishedRoom: React.FC<Prop> = ({ room }) => {
       </Text>
       <Box>
         <Text>結果</Text>
+        {/* TODO: 勝ち負けを表示 */}
       </Box>
       <Box>
+        {/* TODO: 押したらhistoryを積む */}
         <Button>続ける</Button>
       </Box>
     </Box>
