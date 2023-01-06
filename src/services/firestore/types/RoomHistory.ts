@@ -1,6 +1,6 @@
 import { DocumentData, FirestoreDataConverter, Timestamp } from 'firebase/firestore';
 
-type Hand = 'ROCK' | 'PAPER' | 'SCISSOR';
+export type Hand = 'ROCK' | 'PAPER' | 'SCISSOR';
 
 export type RoomHistory = {
   leftUserId?: string;

@@ -54,8 +54,13 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const getPlayer = (): Player => {
     if (!player.id) {
-      const newId = uuidv4();
-      setId(newId);
+      const playerId = window.localStorage.getItem('playerId');
+      if (playerId) {
+        setId(playerId);
+      } else {
+        const newId = uuidv4();
+        setId(newId);
+      }
     }
     return { ...player, id: player.id as string };
   };
