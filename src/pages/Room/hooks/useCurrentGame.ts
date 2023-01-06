@@ -1,5 +1,5 @@
 import { usePlayer } from '@/providers/PlayerProvider';
-import { RoomHistory } from '@/services/firestore/types/RoomHistory';
+import { RoomHistory } from './useRoom/types';
 
 export type Seat = 'LEFT' | 'RIGHT';
 

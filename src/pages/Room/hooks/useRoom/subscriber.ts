@@ -14,7 +14,7 @@ export const subscriber = (room: Room, action: SetHistories): Unsubscribe => {
           console.log('New or Modified: ', change.doc.data());
           action(
             room,
-            snapshot.docs.map((d) => d.data()),
+            snapshot.docs.map((d) => ({ ...d.data(), id: d.id })),
           );
         }
       });
