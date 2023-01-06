@@ -1,13 +1,14 @@
 import React from 'react';
 import { Box, Button, Text } from '@chakra-ui/react';
 import { Room } from '@/pages/Room/hooks';
+import { Game } from '@/pages/Room/hooks/useRoom/types';
 
 type Prop = {
   room: Room;
+  game: Game;
 };
 
-export const PlayingRoom: React.FC<Prop> = ({ room }) => {
-  console.log(room);
+export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
   return (
     <Box>
       {/* TODO: 閲覧者の人数を表示する */}
@@ -15,7 +16,7 @@ export const PlayingRoom: React.FC<Prop> = ({ room }) => {
       <Text>
         {room.id}: {room.name}
       </Text>
-      {room.playerSeat && (
+      {game.playerSeat && (
         <Box>
           <Text>手を選んでください</Text>
           <Box>
