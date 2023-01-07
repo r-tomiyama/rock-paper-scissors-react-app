@@ -1,10 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
-import { Alert, AlertIcon, Box, Center, Flex, Image, Text } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box } from '@chakra-ui/react';
 import { Room } from '@/pages/Room/hooks';
 import { Game } from '@/pages/Room/hooks/useRoom/types';
 import { useSelectHand } from './hooks';
 import { Hand } from '@/services/firestore/types/RoomHistory';
-import { usePlayer } from '@/providers/PlayerProvider';
 import { GameTable } from '@/sharedComponents';
 
 type Prop = {
@@ -14,7 +13,6 @@ type Prop = {
 
 export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
   const { trigger } = useSelectHand();
-  const { player } = usePlayer();
 
   const selectHand = useCallback(async (hand: Hand): Promise<void> => {
     await trigger({ roomId: room.id, game, hand });
@@ -25,18 +23,6 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
     [game],
   );
 
-  const userId: { leftUserId?: string; rightUserId?: string } = useMemo(() => {
-    // TODO: 型付けを改善する
-    if (game.playerSeat) {
-      return {
-        leftUserId: player.id,
-        rightUserId: game.leftUserId === player.id ? game.rightUserId : game.leftUserId,
-      };
-    } else {
-      return { leftUserId: game.leftUserId, rightUserId: game.rightUserId };
-    }
-  }, [game.playerSeat]);
-
   const isPlayableInfo:
     | {
         isPlayable: true;
@@ -46,7 +32,7 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
     | false = useMemo(
     // TODO: 効率化のために、手札ごとのinfoをここで作る
     () =>
-      game.playerSeat
+      game.isPlaying
         ? {
             isPlayable: true,
             selectHand: selectHand,
@@ -59,17 +45,14 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
   return (
     <Box>
       {/* TODO: 閲覧者の人数を表示する */}
-
-      {game.playerSeat && (
-        <Alert status='info'>
-          <AlertIcon />
-          手を選んでください!
-        </Alert>
-      )}
+      <Alert status='info'>
+        <AlertIcon />
+        {game.isPlaying ? '手を選んでください!' : 'ゲームを観戦中です'}
+      </Alert>
 
       <GameTable
-        leftUserId={userId.leftUserId}
-        rightUserId={userId.rightUserId}
+        leftUserId={game.leftUserId}
+        rightUserId={game.rightUserId}
         isPlayableInfo={isPlayableInfo}
       />
     </Box>

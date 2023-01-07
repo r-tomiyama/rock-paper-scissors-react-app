@@ -13,7 +13,11 @@ export type RoomHistory = {
 } & RoomHistoryData;
 
 export type Game = {
+  isPlaying: boolean;
+  isWatching: boolean;
   playerSeat?: Seat;
+  leftUserId?: string;
+  rightUserId?: string;
 } & RoomHistory;
 
 export type SetHistories = (_r: Room, _hs: RoomHistory[]) => void;

@@ -1,10 +1,10 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { Room } from '@/pages/Room/hooks';
 import { Game } from '@/pages/Room/hooks/useRoom/types';
-import { useCreateNextGame } from './hooks';
+import { useCreateNextGame, useGameResult } from './hooks';
 import { usePlayer } from '@/providers/PlayerProvider';
-import { ResultMessage } from './parts/ResultMessage';
 import { GameTable } from '@/sharedComponents';
+import { Alert, AlertIcon, Link, Text } from '@chakra-ui/react';
 
 type Prop = {
   room: Room;
@@ -17,29 +17,49 @@ export const FinishedRoom: React.FC<Prop> = ({ room, game }) => {
 
   const { trigger } = useCreateNextGame();
   const { player } = usePlayer();
+  const { result } = useGameResult(game);
 
   const nextGame = useCallback(async (): Promise<void> => {
     await trigger({ room, playerId: player.id });
   }, [room, player]);
 
-  const userId: { leftUserId?: string; rightUserId?: string } = useMemo(() => {
-    // TODO: 型付けを改善する
-    if (game.playerSeat) {
-      return {
-        leftUserId: player.id,
-        rightUserId: game.leftUserId === player.id ? game.rightUserId : game.leftUserId,
-      };
-    } else {
-      return { leftUserId: game.leftUserId, rightUserId: game.rightUserId };
-    }
-  }, [game.playerSeat]);
+  const status = game.isPlaying
+    ? result === 'WIN'
+      ? 'success'
+      : result === 'LOSE'
+      ? 'error'
+      : 'warning'
+    : 'info';
+
+  const message = game.isPlaying
+    ? result === 'WIN'
+      ? '勝ちました!'
+      : result === 'LOSE'
+      ? '負けました...'
+      : '引き分けでした'
+    : 'ゲームを観戦中です';
 
   return (
     <>
-      {game.playerSeat && <ResultMessage game={game} nextAction={nextGame} />}
+      <Alert status={status}>
+        <AlertIcon />
+        <Text>{message}</Text>
+        {game.isPlaying && (
+          <Link
+            color='gray.600'
+            fontWeight='semibold'
+            textDecoration='underline'
+            ml='5vw'
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onClick={async () => nextGame()}
+          >
+            続けますか?
+          </Link>
+        )}
+      </Alert>
       <GameTable
-        leftUserId={userId.leftUserId}
-        rightUserId={userId.rightUserId}
+        leftUserId={game.leftUserId}
+        rightUserId={game.rightUserId}
         isPlayableInfo={false}
       />
     </>

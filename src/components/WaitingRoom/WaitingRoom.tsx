@@ -12,21 +12,6 @@ type Prop = {
 };
 
 export const WaitingRoom: React.FC<Prop> = ({ room, game }) => {
-  const { player } = usePlayer();
-
-  // TODO: この辺は常に必要になるので、gameに含める
-  const userId: { leftUserId?: string; rightUserId?: string } = useMemo(() => {
-    // TODO: 型付けを改善する
-    if (game.playerSeat) {
-      return {
-        leftUserId: player.id,
-        rightUserId: game.leftUserId === player.id ? game.rightUserId : game.leftUserId,
-      };
-    } else {
-      return { leftUserId: undefined, rightUserId: game.rightUserId || game.leftUserId };
-    }
-  }, [game.playerSeat]);
-
   return (
     <Box>
       <Alert status='info'>
@@ -34,11 +19,11 @@ export const WaitingRoom: React.FC<Prop> = ({ room, game }) => {
         メンバーが揃うのを待っています!
       </Alert>
       <GameTable
-        leftUserId={userId.leftUserId}
-        rightUserId={userId.rightUserId}
+        leftUserId={game.leftUserId}
+        rightUserId={game.rightUserId}
         isPlayableInfo={false}
       />
-      {!game.playerSeat && (
+      {!game.isPlaying && (
         <Center>
           <JoinGameForm roomId={room.id} playingGame={game} />
         </Center>
