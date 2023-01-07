@@ -4,10 +4,9 @@ import useSWR from 'swr';
 import { fetcher } from './fetcher';
 import { Room, Result, SetHistories, Game } from './types';
 import { subscriber } from './subscriber';
-import { useCurrentGame, useDetermineRoomStatus } from '@/pages/Room/hooks';
+import { useCurrentGame } from '@/pages/Room/hooks';
 
 export const useRoom = (documentId?: string): Result => {
-  const { determineRoomStatus } = useDetermineRoomStatus();
   const { getCurrentGame } = useCurrentGame();
 
   const [room, setRoom] = useState<Room>();
@@ -15,9 +14,8 @@ export const useRoom = (documentId?: string): Result => {
 
   const setHistories: SetHistories = (room, histories) => {
     const currentGame = getCurrentGame(histories);
-    const status = determineRoomStatus(currentGame);
 
-    setRoom({ ...room, status, histories });
+    setRoom({ ...room, histories });
     setGame(currentGame);
   };
 
@@ -25,7 +23,7 @@ export const useRoom = (documentId?: string): Result => {
 
   useEffect(() => {
     if (data) {
-      setRoom({ ...data, status: 'WAITING', histories: [] });
+      setRoom({ ...data, histories: [] });
     }
   }, [data, setRoom]);
 

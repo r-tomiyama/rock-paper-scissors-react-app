@@ -1,10 +1,13 @@
 import { usePlayer } from '@/providers/PlayerProvider';
+import { useDetermineRoomStatus } from '.';
 import { Game, RoomHistory } from './useRoom/types';
 
 export type Seat = 'LEFT' | 'RIGHT';
 
 export const useCurrentGame = () => {
   const { player } = usePlayer();
+  const { determineRoomStatus } = useDetermineRoomStatus();
+
   const getPlayerSeat = (game?: RoomHistory): Seat | undefined => {
     if (player.id === game?.leftUserId) {
       return 'LEFT';
@@ -15,6 +18,9 @@ export const useCurrentGame = () => {
 
   const getCurrentGame = (histories: RoomHistory[]): Game | undefined => {
     const current = histories[0];
+    const status = determineRoomStatus(current);
+
+    // TODO: リファクタ
 
     const isPlaying = player.id === current?.leftUserId || player.id === current?.rightUserId;
     const isWatching = (!isPlaying && !!current?.leftUserId && !!current?.rightUserId) || false;
@@ -35,6 +41,7 @@ export const useCurrentGame = () => {
 
     return {
       ...current,
+      status,
       playerSeat,
       isPlaying,
       isWatching,

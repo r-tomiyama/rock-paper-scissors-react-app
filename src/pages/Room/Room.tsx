@@ -13,11 +13,39 @@ export const Room: React.FC = () => {
   const { id } = useParams();
   const { room, game, isValidating } = useRoom(id);
 
-  const renderRoom = useMemo(() => {
+  const renderBreadcrumb = useMemo(
+    () => (
+      <Breadcrumb spacing='8px' mb='3vh' separator={<ChevronRightIcon color='gray.500' />}>
+        <BreadcrumbItem>
+          <BreadcrumbLink href='/'>
+            <Text color='gray.500' fontWeight={'semibold'}>
+              トップ
+            </Text>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink href='#'>
+            <Flex align={'end'}>
+              <Text color='gray.500' fontWeight='semibold'>
+                {room?.name}
+              </Text>
+              <Text color='gray.500' fontSize={'xs'}>
+                （{room?.id}）
+              </Text>
+            </Flex>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
+    ),
+    [room],
+  );
+
+  const renderContent = useMemo(() => {
     if (typeof room === 'undefined' || typeof game === 'undefined') {
       return <></>;
     }
-    switch (room.status) {
+    switch (game.status) {
       case 'WAITING':
         return <WaitingRoom room={room} game={game} />;
       case 'PLAYING':
@@ -25,35 +53,14 @@ export const Room: React.FC = () => {
       case 'FINISHED':
         return <FinishedRoom room={room} game={game} />;
     }
-  }, [room?.status, game]);
+  }, [game]);
 
   return (
     <>
       {room ? (
         <>
-          <Breadcrumb spacing='8px' mb='3vh' separator={<ChevronRightIcon color='gray.500' />}>
-            <BreadcrumbItem>
-              <BreadcrumbLink href='/'>
-                <Text color='gray.500' fontWeight={'semibold'}>
-                  トップ
-                </Text>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href='#'>
-                <Flex align={'end'}>
-                  <Text color='gray.500' fontWeight='semibold'>
-                    {room.name}
-                  </Text>
-                  <Text color='gray.500' fontSize={'xs'}>
-                    （{room.id}）
-                  </Text>
-                </Flex>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-          {renderRoom}
+          {renderBreadcrumb}
+          {renderContent}
         </>
       ) : isValidating ? (
         <Spinner />

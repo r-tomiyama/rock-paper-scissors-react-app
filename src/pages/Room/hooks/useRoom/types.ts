@@ -5,7 +5,7 @@ import { Seat, Status } from '../';
 export type Room = {
   id: string;
   histories: RoomHistoryData[] | never[];
-  status: Status;
+  // TODO: histories をまとめて取得し、空配列のケースがないようにする
 } & RoomData;
 
 export type RoomHistory = {
@@ -13,6 +13,7 @@ export type RoomHistory = {
 } & RoomHistoryData;
 
 export type Game = {
+  status: Status;
   isPlaying: boolean;
   isWatching: boolean;
   playerSeat?: Seat;
