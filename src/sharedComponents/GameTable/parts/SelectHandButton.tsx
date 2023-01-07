@@ -4,27 +4,29 @@ import { Button, Image } from '@chakra-ui/react';
 
 type Prop = {
   hand: Hand;
+  selected: boolean;
   isPlayableInfo:
     | {
         isPlayable: true;
-        selectedHand?: Hand;
         selectHand: (_hand: Hand) => Promise<void>;
       }
     | false;
 };
 
-export const SelectHandButton: React.FC<Prop> = ({ hand, isPlayableInfo }) => {
-  const filePath = `/images/${hand.toLowerCase()}.png`;
+export const SelectHandButton: React.FC<Prop> = React.memo(function SelectHandButton(prop) {
+  const filePath = `/images/${prop.hand.toLowerCase()}.png`;
+
+  const isPlayableInfo = prop.isPlayableInfo;
 
   return isPlayableInfo ? (
     <Button
       mx='1vw'
       py='5vw'
       borderRadius='full'
-      bg={isPlayableInfo.selectedHand === hand ? 'cyan.200' : 'gray.100'}
+      bg={prop.selected ? 'cyan.200' : 'gray.100'}
       _hover={{ bg: 'cyan.300' }}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onClick={async () => await isPlayableInfo.selectHand(hand)}
+      onClick={async () => await isPlayableInfo.selectHand(prop.hand)}
     >
       <Image src={filePath} boxSize='5vw' />
     </Button>
@@ -33,4 +35,4 @@ export const SelectHandButton: React.FC<Prop> = ({ hand, isPlayableInfo }) => {
       <Image src={filePath} boxSize='5vw' />
     </Button>
   );
-};
+});

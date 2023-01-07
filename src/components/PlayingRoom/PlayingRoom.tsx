@@ -5,7 +5,7 @@ import { Game } from '@/pages/Room/hooks/useRoom/types';
 import { useSelectHand } from './hooks';
 import { Hand } from '@/services/firestore/types/RoomHistory';
 import { usePlayer } from '@/providers/PlayerProvider';
-import { SelectHandButton } from './parts';
+import { GameTable } from '@/sharedComponents';
 
 type Prop = {
   room: Room;
@@ -43,13 +43,18 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
         selectedHand?: Hand;
         selectHand: (_hand: Hand) => Promise<void>;
       }
-    | false = game.playerSeat
-    ? {
-        isPlayable: true,
-        selectHand: selectHand,
-        selectedHand: selectedHand,
-      }
-    : false;
+    | false = useMemo(
+    // TODO: 効率化のために、手札ごとのinfoをここで作る
+    () =>
+      game.playerSeat
+        ? {
+            isPlayable: true,
+            selectHand: selectHand,
+            selectedHand: selectedHand,
+          }
+        : false,
+    [game],
+  );
 
   return (
     <Box>
@@ -62,43 +67,11 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
         </Alert>
       )}
 
-      <Flex py='5vh'>
-        <Box width='50%'>
-          <Flex justifyContent='center'>
-            <Flex height='35vw' width='35vw' alignContent='center'>
-              <Image src='/images/player.png' margin='auto 0' />
-            </Flex>
-          </Flex>
-
-          <Center mb='5vh'>
-            <Text>{userId.leftUserId}</Text>
-          </Center>
-
-          <Flex justifyContent='center'>
-            <SelectHandButton hand='ROCK' isPlayableInfo={isPlayableInfo} />
-            <SelectHandButton hand='SCISSOR' isPlayableInfo={isPlayableInfo} />
-            <SelectHandButton hand='PAPER' isPlayableInfo={isPlayableInfo} />
-          </Flex>
-        </Box>
-
-        <Box width='50%'>
-          <Flex justifyContent='center'>
-            <Flex height='35vw' width='35vw' alignContent='center'>
-              <Image src='/images/opponent.png' margin='auto 0' />
-            </Flex>
-          </Flex>
-
-          <Center mb='5vh'>
-            <Text>{userId.rightUserId}</Text>
-          </Center>
-
-          <Flex justifyContent='center'>
-            <SelectHandButton hand='ROCK' isPlayableInfo={false} />
-            <SelectHandButton hand='SCISSOR' isPlayableInfo={false} />
-            <SelectHandButton hand='PAPER' isPlayableInfo={false} />
-          </Flex>
-        </Box>
-      </Flex>
+      <GameTable
+        leftUserId={userId.leftUserId}
+        rightUserId={userId.rightUserId}
+        isPlayableInfo={isPlayableInfo}
+      />
     </Box>
   );
 };
