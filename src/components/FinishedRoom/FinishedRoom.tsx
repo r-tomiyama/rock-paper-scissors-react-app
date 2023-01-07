@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Box, Button, Center, Text } from '@chakra-ui/react';
 import { Room } from '@/pages/Room/hooks';
 import { Game } from '@/pages/Room/hooks/useRoom/types';
 import { useCreateNextGame } from './hooks';
@@ -19,18 +19,5 @@ export const FinishedRoom: React.FC<Prop> = ({ room, game }) => {
     await trigger({ room, playerId: player.id });
   }, [room, player]);
 
-  return (
-    <Box>
-      <ResultMessage game={game} />
-      <Box>
-        <Button
-          isLoading={isMutating}
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onClick={async () => nextGame()}
-        >
-          続ける
-        </Button>
-      </Box>
-    </Box>
-  );
+  return <>{game.playerSeat && <ResultMessage game={game} nextAction={nextGame} />}</>;
 };

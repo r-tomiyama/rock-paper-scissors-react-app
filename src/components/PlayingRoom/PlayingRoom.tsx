@@ -54,54 +54,51 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
   return (
     <Box>
       {/* TODO: 閲覧者の人数を表示する */}
-      {
-        <Box>
-          {game.playerSeat && (
-            <Alert status='info'>
-              <AlertIcon />
-              手を選んでください!
-            </Alert>
-          )}
 
-          <Flex py='5vh'>
-            <Box width='50%'>
-              <Flex justifyContent='center'>
-                <Flex height='35vw' width='35vw' alignContent='center'>
-                  <Image src='/images/player.png' margin='auto 0' />
-                </Flex>
-              </Flex>
+      {game.playerSeat && (
+        <Alert status='info'>
+          <AlertIcon />
+          手を選んでください!
+        </Alert>
+      )}
 
-              <Center mb='5vh'>
-                <Text>{userId.leftUserId}</Text>
-              </Center>
+      <Flex py='5vh'>
+        <Box width='50%'>
+          <Flex justifyContent='center'>
+            <Flex height='35vw' width='35vw' alignContent='center'>
+              <Image src='/images/player.png' margin='auto 0' />
+            </Flex>
+          </Flex>
 
-              <Flex justifyContent='center'>
-                <SelectHandButton hand='ROCK' isPlayableInfo={isPlayableInfo} />
-                <SelectHandButton hand='SCISSOR' isPlayableInfo={isPlayableInfo} />
-                <SelectHandButton hand='PAPER' isPlayableInfo={isPlayableInfo} />
-              </Flex>
-            </Box>
+          <Center mb='5vh'>
+            <Text>{userId.leftUserId}</Text>
+          </Center>
 
-            <Box width='50%'>
-              <Flex justifyContent='center'>
-                <Flex height='35vw' width='35vw' alignContent='center'>
-                  <Image src='/images/opponent.png' margin='auto 0' />
-                </Flex>
-              </Flex>
-
-              <Center mb='5vh'>
-                <Text>{userId.rightUserId}</Text>
-              </Center>
-
-              <Flex justifyContent='center'>
-                <SelectHandButton hand='ROCK' isPlayableInfo={false} />
-                <SelectHandButton hand='SCISSOR' isPlayableInfo={false} />
-                <SelectHandButton hand='PAPER' isPlayableInfo={false} />
-              </Flex>
-            </Box>
+          <Flex justifyContent='center'>
+            <SelectHandButton hand='ROCK' isPlayableInfo={isPlayableInfo} />
+            <SelectHandButton hand='SCISSOR' isPlayableInfo={isPlayableInfo} />
+            <SelectHandButton hand='PAPER' isPlayableInfo={isPlayableInfo} />
           </Flex>
         </Box>
-      }
+
+        <Box width='50%'>
+          <Flex justifyContent='center'>
+            <Flex height='35vw' width='35vw' alignContent='center'>
+              <Image src='/images/opponent.png' margin='auto 0' />
+            </Flex>
+          </Flex>
+
+          <Center mb='5vh'>
+            <Text>{userId.rightUserId}</Text>
+          </Center>
+
+          <Flex justifyContent='center'>
+            <SelectHandButton hand='ROCK' isPlayableInfo={false} />
+            <SelectHandButton hand='SCISSOR' isPlayableInfo={false} />
+            <SelectHandButton hand='PAPER' isPlayableInfo={false} />
+          </Flex>
+        </Box>
+      </Flex>
     </Box>
   );
 };
