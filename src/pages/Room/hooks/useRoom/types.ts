@@ -1,4 +1,4 @@
-import { RoomHistory as RoomHistoryData } from '@/services/firestore/types/RoomHistory';
+import { Hand, RoomHistory as RoomHistoryData } from '@/services/firestore/types/RoomHistory';
 import { Room as RoomData } from '@/services/firestore/types/Room';
 import { Seat, Status } from '../';
 
@@ -18,6 +18,8 @@ export type Game = {
   playerSeat?: Seat;
   leftUserId?: string;
   rightUserId?: string;
+  playerHand?: Hand;
+  opponentHand?: Hand;
 } & RoomHistory;
 
 export type SetHistories = (_r: Room, _hs: RoomHistory[]) => void;

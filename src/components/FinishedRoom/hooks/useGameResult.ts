@@ -1,10 +1,12 @@
 import { Game } from '@/pages/Room/hooks/useRoom/types';
+import { Hand } from '@/services/firestore/types/RoomHistory';
 
 export type GameResult = 'WIN' | 'LOSE' | 'DRAW';
 
 export const useGameResult = (game: Game): { result: GameResult } => {
-  const playerHand = game.playerSeat === 'LEFT' ? game.leftHand : game.rightHand;
-  const opponentHand = game.playerSeat === 'LEFT' ? game.rightHand : game.leftHand;
+  // TODO: 型を改善する
+  const playerHand = game.playerHand as Hand;
+  const opponentHand = game.opponentHand as Hand;
 
   if (playerHand === 'ROCK') {
     if (opponentHand === 'PAPER') {

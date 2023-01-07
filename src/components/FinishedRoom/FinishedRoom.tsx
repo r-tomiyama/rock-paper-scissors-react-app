@@ -57,11 +57,7 @@ export const FinishedRoom: React.FC<Prop> = ({ room, game }) => {
           </Link>
         )}
       </Alert>
-      <GameTable
-        leftUserId={game.leftUserId}
-        rightUserId={game.rightUserId}
-        isPlayableInfo={false}
-      />
+      <GameTable leftUserId={game.leftUserId} rightUserId={game.rightUserId} game={game} />
     </>
   );
 };

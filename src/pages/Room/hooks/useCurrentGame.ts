@@ -19,19 +19,31 @@ export const useCurrentGame = () => {
     const isPlaying = player.id === current?.leftUserId || player.id === current?.rightUserId;
     const isWatching = (!isPlaying && !!current?.leftUserId && !!current?.rightUserId) || false;
 
+    const playerSeat = getPlayerSeat(current);
+
     const opponentUserId =
       current.leftUserId === player.id ? current.rightUserId : current.leftUserId;
 
     const leftUserId = isWatching ? current.leftUserId : isPlaying ? player.id : undefined;
     const rightUserId = isWatching ? current.rightUserId : isPlaying ? opponentUserId : undefined;
 
+    const playerHand = playerSeat === 'LEFT' ? current.leftHand : current.rightHand;
+    const opponentHand = playerSeat === 'LEFT' ? current.rightHand : current.leftHand;
+
+    const leftHand = isWatching ? current.leftHand : isPlaying ? playerHand : undefined;
+    const rightHand = isWatching ? current.rightHand : isPlaying ? opponentHand : undefined;
+
     return {
       ...current,
-      playerSeat: getPlayerSeat(current),
+      playerSeat,
       isPlaying,
       isWatching,
       leftUserId,
       rightUserId,
+      playerHand,
+      opponentHand,
+      leftHand,
+      rightHand,
     };
   };
 

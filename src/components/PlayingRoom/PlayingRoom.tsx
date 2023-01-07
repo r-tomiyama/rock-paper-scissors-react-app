@@ -18,27 +18,6 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
     await trigger({ roomId: room.id, game, hand });
   }, []);
 
-  const selectedHand = useMemo(
-    () => (game.playerSeat === 'LEFT' ? game['leftHand'] : game['rightHand']),
-    [game],
-  );
-
-  const isPlayableInfo:
-    | {
-        isPlayable: true;
-        selectedHand?: Hand;
-      }
-    | false = useMemo(
-    // TODO: 効率化のために、手札ごとのinfoをここで作る
-    () =>
-      game.isPlaying
-        ? {
-            isPlayable: true,
-            selectedHand: selectedHand,
-          }
-        : false,
-    [game],
-  );
   return (
     <Box>
       {/* TODO: 閲覧者の人数を表示する */}
@@ -50,7 +29,7 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
       <GameTable
         leftUserId={game.leftUserId}
         rightUserId={game.rightUserId}
-        isPlayableInfo={isPlayableInfo}
+        game={game}
         selectHand={selectHand}
       />
     </Box>

@@ -18,11 +18,7 @@ export const WaitingRoom: React.FC<Prop> = ({ room, game }) => {
         <AlertIcon />
         メンバーが揃うのを待っています!
       </Alert>
-      <GameTable
-        leftUserId={game.leftUserId}
-        rightUserId={game.rightUserId}
-        isPlayableInfo={false}
-      />
+      <GameTable leftUserId={game.leftUserId} rightUserId={game.rightUserId} game={game} />
       {!game.isPlaying && (
         <Center>
           <JoinGameForm roomId={room.id} playingGame={game} />
