@@ -27,7 +27,6 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
     | {
         isPlayable: true;
         selectedHand?: Hand;
-        selectHand: (_hand: Hand) => Promise<void>;
       }
     | false = useMemo(
     // TODO: 効率化のために、手札ごとのinfoをここで作る
@@ -35,13 +34,11 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
       game.isPlaying
         ? {
             isPlayable: true,
-            selectHand: selectHand,
             selectedHand: selectedHand,
           }
         : false,
     [game],
   );
-
   return (
     <Box>
       {/* TODO: 閲覧者の人数を表示する */}
@@ -54,6 +51,7 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
         leftUserId={game.leftUserId}
         rightUserId={game.rightUserId}
         isPlayableInfo={isPlayableInfo}
+        selectHand={selectHand}
       />
     </Box>
   );

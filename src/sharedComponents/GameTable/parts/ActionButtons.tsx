@@ -8,9 +8,9 @@ type Prop = {
     | {
         isPlayable: true;
         selectedHand?: Hand;
-        selectHand: (_hand: Hand) => Promise<void>;
       }
     | false;
+  selectHand?: (_hand: Hand) => Promise<void>;
 };
 
 export const ActionButtons: React.FC<Prop> = React.memo(function ActionButtons(prop) {
@@ -20,6 +20,7 @@ export const ActionButtons: React.FC<Prop> = React.memo(function ActionButtons(p
         hand='ROCK'
         isPlayableInfo={prop.isPlayableInfo}
         selected={prop.isPlayableInfo && prop.isPlayableInfo.selectedHand === 'ROCK' ? true : false}
+        selectHand={prop.selectHand}
       />
       <SelectHandButton
         hand='SCISSOR'
@@ -27,6 +28,7 @@ export const ActionButtons: React.FC<Prop> = React.memo(function ActionButtons(p
         selected={
           prop.isPlayableInfo && prop.isPlayableInfo.selectedHand === 'SCISSOR' ? true : false
         }
+        selectHand={prop.selectHand}
       />
       <SelectHandButton
         hand='PAPER'
@@ -34,6 +36,7 @@ export const ActionButtons: React.FC<Prop> = React.memo(function ActionButtons(p
         selected={
           prop.isPlayableInfo && prop.isPlayableInfo.selectedHand === 'PAPER' ? true : false
         }
+        selectHand={prop.selectHand}
       />
     </Flex>
   );

@@ -5,10 +5,10 @@ import { Button, Image } from '@chakra-ui/react';
 type Prop = {
   hand: Hand;
   selected: boolean;
+  selectHand?: (_hand: Hand) => Promise<void>;
   isPlayableInfo:
     | {
         isPlayable: true;
-        selectHand: (_hand: Hand) => Promise<void>;
       }
     | false;
 };
@@ -26,7 +26,7 @@ export const SelectHandButton: React.FC<Prop> = React.memo(function SelectHandBu
       bg={prop.selected ? 'cyan.200' : 'gray.100'}
       _hover={{ bg: prop.selected ? 'cyan.300' : 'gray.200' }}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onClick={async () => await isPlayableInfo.selectHand(prop.hand)}
+      onClick={async () => prop.selectHand && (await prop.selectHand(prop.hand))}
     >
       <Image src={filePath} boxSize='5vw' />
     </Button>

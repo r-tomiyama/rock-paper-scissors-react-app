@@ -8,16 +8,21 @@ import { ActionButtons } from './parts/ActionButtons';
 type Prop = {
   leftUserId?: string;
   rightUserId?: string;
+  selectHand?: (_hand: Hand) => Promise<void>;
   isPlayableInfo:
     | {
         isPlayable: true;
         selectedHand?: Hand;
-        selectHand: (_hand: Hand) => Promise<void>;
       }
     | false;
 };
 
-export const GameTable: React.FC<Prop> = ({ leftUserId, rightUserId, isPlayableInfo }) => {
+export const GameTable: React.FC<Prop> = ({
+  leftUserId,
+  rightUserId,
+  selectHand,
+  isPlayableInfo,
+}) => {
   return (
     <Flex py='5vh'>
       <Box width='50%'>
@@ -31,7 +36,7 @@ export const GameTable: React.FC<Prop> = ({ leftUserId, rightUserId, isPlayableI
           <Text>{leftUserId}</Text>
         </Center>
 
-        <ActionButtons isPlayableInfo={isPlayableInfo} />
+        <ActionButtons isPlayableInfo={isPlayableInfo} selectHand={selectHand} />
       </Box>
 
       <Box width='50%'>
