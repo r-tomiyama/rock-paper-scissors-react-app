@@ -21,6 +21,10 @@ export const GameTable: React.FC<Prop> = ({ leftUserId, rightUserId, isPlayableI
   return (
     <Flex py='5vh'>
       <Box width='50%'>
+        {/* TODO: 効率化する */}
+        {/* TODO: 名前がなくても見た目が整うようにする */}
+        {/* TODO: 名前が改行されないようにする */}
+        {/* TODO: 名前を表示できるようにする */}
         <Image type='player' />
 
         <Center mb='5vh'>

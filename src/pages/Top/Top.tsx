@@ -15,3 +15,12 @@ export const Top: React.FC = () => {
     </>
   );
 };
+
+// TODO: 部屋をアーカイブできるようにする
+// TODO: セキュリティルールを作る
+// TODO: deploy
+// TODO: TOP表示時にしばらく動いていない部屋を消す (本当はfunctionsでやりたい..)
+
+// TODO: データの変更
+// histories → gameHistories に変更したい
+// left, rightをただの順番にする

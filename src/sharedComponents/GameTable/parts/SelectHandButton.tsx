@@ -24,7 +24,7 @@ export const SelectHandButton: React.FC<Prop> = React.memo(function SelectHandBu
       py='5vw'
       borderRadius='full'
       bg={prop.selected ? 'cyan.200' : 'gray.100'}
-      _hover={{ bg: 'cyan.300' }}
+      _hover={{ bg: prop.selected ? 'cyan.300' : 'gray.200' }}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onClick={async () => await isPlayableInfo.selectHand(prop.hand)}
     >
