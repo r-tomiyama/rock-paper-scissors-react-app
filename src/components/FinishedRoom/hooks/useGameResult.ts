@@ -10,26 +10,17 @@ export const useGameResult = (
   message: string;
 } => {
   const judge = (playerHand: Hand, opponentHand: Hand): GameResult => {
-    if (playerHand === 'ROCK') {
-      if (opponentHand === 'PAPER') {
-        return 'LOSE';
-      } else if (opponentHand === 'SCISSOR') {
-        return 'WIN';
-      }
-    } else if (playerHand === 'PAPER') {
-      if (opponentHand === 'SCISSOR') {
-        return 'LOSE';
-      } else if (opponentHand === 'ROCK') {
-        return 'WIN';
-      }
-    } else if (playerHand === 'SCISSOR') {
-      if (opponentHand === 'ROCK') {
-        return 'LOSE';
-      } else if (opponentHand === 'PAPER') {
-        return 'WIN';
-      }
+    if (playerHand === opponentHand) {
+      return 'DRAW';
+    } else if (
+      (playerHand === 'ROCK' && opponentHand === 'SCISSOR') ||
+      (playerHand === 'SCISSOR' && opponentHand === 'PAPER') ||
+      (playerHand === 'PAPER' && opponentHand === 'ROCK')
+    ) {
+      return 'WIN';
+    } else {
+      return 'LOSE';
     }
-    return 'DRAW';
   };
 
   if (game.isJoined) {
