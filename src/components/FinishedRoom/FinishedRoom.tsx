@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
-import { Room } from '@/pages/Room/hooks';
-import { Game } from '@/pages/Room/hooks/useRoom/types';
+import { FinishedGameTable, Room } from '@/pages/Room/hooks';
 import { useCreateNextGame, useGameResult } from './hooks';
 import { usePlayer } from '@/providers/PlayerProvider';
 import { GameTable } from '@/sharedComponents';
@@ -8,43 +7,26 @@ import { Alert, AlertIcon, Link, Text } from '@chakra-ui/react';
 
 type Prop = {
   room: Room;
-  game: Game;
+  game: FinishedGameTable;
 };
 
 export const FinishedRoom: React.FC<Prop> = ({ room, game }) => {
   // TODO: 結果をアニメーション表示する
-  // TODO: 選択した手に色を付ける
 
   const { trigger } = useCreateNextGame();
   const { player } = usePlayer();
-  const { result } = useGameResult(game);
+  const { status, message } = useGameResult(game);
 
   const nextGame = useCallback(async (): Promise<void> => {
     await trigger({ room, playerId: player.id });
   }, [room, player]);
-
-  const status = game.isPlaying
-    ? result === 'WIN'
-      ? 'success'
-      : result === 'LOSE'
-      ? 'error'
-      : 'warning'
-    : 'info';
-
-  const message = game.isPlaying
-    ? result === 'WIN'
-      ? '勝ちました!'
-      : result === 'LOSE'
-      ? '負けました...'
-      : '引き分けでした'
-    : 'ゲームを観戦中です';
 
   return (
     <>
       <Alert status={status}>
         <AlertIcon />
         <Text>{message}</Text>
-        {game.isPlaying && (
+        {game.isJoined && (
           <Link
             color='gray.600'
             fontWeight='semibold'
@@ -57,7 +39,13 @@ export const FinishedRoom: React.FC<Prop> = ({ room, game }) => {
           </Link>
         )}
       </Alert>
-      <GameTable leftUserId={game.leftUserId} rightUserId={game.rightUserId} game={game} />
+      <GameTable
+        isJoined={game.isJoined}
+        leftUserId={game.leftUserId}
+        rightUserId={game.rightUserId}
+        leftHand={game.leftHand}
+        rightHand={game.rightHand}
+      />
     </>
   );
 };

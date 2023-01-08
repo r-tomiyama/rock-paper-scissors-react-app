@@ -1,9 +1,9 @@
 import { onSnapshot, orderBy, query, Unsubscribe } from 'firebase/firestore';
 
 import { roomHistoriesCollection } from '@/services/firestore/firestoreService';
-import { Room, SetHistories } from './types';
+import { Room, UpdateRoom } from './types';
 
-export const subscriber = (room: Room, action: SetHistories): Unsubscribe => {
+export const subscriber = (room: Room, action: UpdateRoom): Unsubscribe => {
   const q = query(roomHistoriesCollection(room.id), orderBy('createdAt', 'desc'));
 
   return onSnapshot(

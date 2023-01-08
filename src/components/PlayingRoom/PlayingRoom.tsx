@@ -1,14 +1,14 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { Alert, AlertIcon, Box } from '@chakra-ui/react';
 import { Room } from '@/pages/Room/hooks';
-import { Game } from '@/pages/Room/hooks/useRoom/types';
+import { PlayingGameTable } from '@/pages/Room/hooks';
 import { useSelectHand } from './hooks';
 import { Hand } from '@/services/firestore/types/RoomHistory';
 import { GameTable } from '@/sharedComponents';
 
 type Prop = {
   room: Room;
-  game: Game;
+  game: PlayingGameTable;
 };
 
 export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
@@ -23,13 +23,15 @@ export const PlayingRoom: React.FC<Prop> = ({ room, game }) => {
       {/* TODO: 閲覧者の人数を表示する */}
       <Alert status='info'>
         <AlertIcon />
-        {game.isPlaying ? '手を選んでください!' : 'ゲームを観戦中です'}
+        {game.isJoined ? '手を選んでください!' : 'ゲームを観戦中です'}
       </Alert>
 
       <GameTable
+        isJoined={game.isJoined}
         leftUserId={game.leftUserId}
         rightUserId={game.rightUserId}
-        game={game}
+        leftHand={game.leftHand}
+        rightHand={!game.isJoined ? game.rightHand : undefined}
         selectHand={selectHand}
       />
     </Box>

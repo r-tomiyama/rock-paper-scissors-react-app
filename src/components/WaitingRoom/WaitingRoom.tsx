@@ -1,14 +1,12 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Alert, AlertIcon, Box, Center } from '@chakra-ui/react';
-import { Room } from '@/pages/Room/hooks';
+import { Room, WaitingGameTable } from '@/pages/Room/hooks';
 import { JoinGameForm } from '@/components/JoinGameForm';
-import { Game } from '@/pages/Room/hooks/useRoom/types';
 import { GameTable } from '@/sharedComponents';
-import { usePlayer } from '@/providers/PlayerProvider';
 
 type Prop = {
   room: Room;
-  game: Game;
+  game: WaitingGameTable;
 };
 
 export const WaitingRoom: React.FC<Prop> = ({ room, game }) => {
@@ -18,8 +16,12 @@ export const WaitingRoom: React.FC<Prop> = ({ room, game }) => {
         <AlertIcon />
         メンバーが揃うのを待っています!
       </Alert>
-      <GameTable leftUserId={game.leftUserId} rightUserId={game.rightUserId} game={game} />
-      {!game.isPlaying && (
+      <GameTable
+        isJoined={game.isJoined}
+        leftUserId={game.leftUserId}
+        rightUserId={game.rightUserId}
+      />
+      {!game.isJoined && (
         <Center>
           <JoinGameForm roomId={room.id} playingGame={game} />
         </Center>

@@ -24,4 +24,3 @@ export const Top: React.FC = () => {
 // TODO: データの変更
 // histories → gameHistories に変更したい
 // left, rightを first, secondに変更する
-// ステータスを game に持たせて、ステータスごとに型を変える

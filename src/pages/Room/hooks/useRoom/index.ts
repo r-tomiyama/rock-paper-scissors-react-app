@@ -1,2 +1,2 @@
 export { useRoom } from './useRoom';
-export type { Room } from './types';
+export type { Room, RoomHistory } from './types';

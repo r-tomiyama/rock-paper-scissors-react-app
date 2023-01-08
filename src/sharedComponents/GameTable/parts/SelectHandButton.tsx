@@ -25,7 +25,14 @@ export const SelectHandButton: React.FC<Prop> = React.memo(function SelectHandBu
       <Image src={filePath} boxSize='5vw' />
     </Button>
   ) : (
-    <Button mx='1vw' py='5vw' borderRadius='full' bg='gray.200' disabled={true}>
+    <Button
+      mx='1vw'
+      py='5vw'
+      borderRadius='full'
+      bg={prop.isSelected ? 'cyan.200' : 'gray.200'}
+      _hover={{ bg: prop.isSelected ? 'cyan.200' : 'gray.200' }}
+      disabled={true}
+    >
       <Image src={filePath} boxSize='5vw' />
     </Button>
   );

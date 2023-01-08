@@ -4,16 +4,24 @@ import { Box, Center, Flex, Text } from '@chakra-ui/react';
 import { Hand } from '@/services/firestore/types/RoomHistory';
 import { Image } from './parts';
 import { ActionButtons } from './parts/ActionButtons';
-import { Game } from '@/pages/Room/hooks/useRoom/types';
 
 type Prop = {
+  isJoined: boolean;
   leftUserId?: string;
   rightUserId?: string;
-  game: Game;
+  leftHand?: Hand;
+  rightHand?: Hand;
   selectHand?: (_hand: Hand) => Promise<void>;
 };
 
-export const GameTable: React.FC<Prop> = ({ leftUserId, rightUserId, game, selectHand }) => {
+export const GameTable: React.FC<Prop> = ({
+  isJoined,
+  leftUserId,
+  rightUserId,
+  leftHand,
+  rightHand,
+  selectHand,
+}) => {
   return (
     <Flex py='5vh'>
       <Box width='50%'>
@@ -27,11 +35,7 @@ export const GameTable: React.FC<Prop> = ({ leftUserId, rightUserId, game, selec
           <Text>{leftUserId}</Text>
         </Center>
 
-        <ActionButtons
-          selectedHand={game.leftHand}
-          isPlaying={game.isPlaying}
-          selectHand={selectHand}
-        />
+        <ActionButtons selectedHand={leftHand} isPlaying={isJoined} selectHand={selectHand} />
       </Box>
 
       <Box width='50%'>
@@ -41,8 +45,7 @@ export const GameTable: React.FC<Prop> = ({ leftUserId, rightUserId, game, selec
           <Text>{rightUserId}</Text>
         </Center>
 
-        {/* TODO: 結果の場合、相手の手を表示する */}
-        <ActionButtons selectedHand={game.rightHand} isPlaying={false} />
+        <ActionButtons selectedHand={rightHand} isPlaying={false} />
       </Box>
     </Flex>
   );

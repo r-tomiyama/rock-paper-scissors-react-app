@@ -11,7 +11,7 @@ import { ChevronRightIcon } from '@chakra-ui/icons';
 
 export const Room: React.FC = () => {
   const { id } = useParams();
-  const { room, game, isValidating } = useRoom(id);
+  const { room, gameTable, isValidating } = useRoom(id);
 
   const renderBreadcrumb = useMemo(
     () => (
@@ -42,18 +42,18 @@ export const Room: React.FC = () => {
   );
 
   const renderContent = useMemo(() => {
-    if (typeof room === 'undefined' || typeof game === 'undefined') {
+    if (typeof room === 'undefined' || typeof gameTable === 'undefined') {
       return <></>;
     }
-    switch (game.status) {
+    switch (gameTable.status) {
       case 'WAITING':
-        return <WaitingRoom room={room} game={game} />;
+        return <WaitingRoom room={room} game={gameTable} />;
       case 'PLAYING':
-        return <PlayingRoom room={room} game={game} />;
+        return <PlayingRoom room={room} game={gameTable} />;
       case 'FINISHED':
-        return <FinishedRoom room={room} game={game} />;
+        return <FinishedRoom room={room} game={gameTable} />;
     }
-  }, [game]);
+  }, [gameTable]);
 
   return (
     <>
