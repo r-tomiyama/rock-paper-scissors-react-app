@@ -1,6 +1,6 @@
 import { usePlayer } from '@/providers/PlayerProvider';
-import { Hand } from '@/services/firestore/types/RoomHistory';
-import { Seat, GameTable } from './types';
+import { GameTable, Hand, Seat } from '@/domain/game';
+
 import {
   generateFinishedGameTable,
   generatePlayingGameTable,

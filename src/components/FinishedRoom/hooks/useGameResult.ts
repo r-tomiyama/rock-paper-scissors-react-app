@@ -1,7 +1,5 @@
-import { FinishedGameTable } from '@/pages/Room/hooks';
-import { Hand } from '@/services/firestore/types/RoomHistory';
-
-export type GameResult = 'WIN' | 'LOSE' | 'DRAW';
+import { FinishedGameTable, Hand } from '@/domain/game';
+import { GameResult } from '@/domain/game';
 
 export const useGameResult = (
   game: FinishedGameTable,

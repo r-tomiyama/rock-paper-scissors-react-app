@@ -1,6 +1,7 @@
+import { GameTable, getPlayerSeat } from '@/domain/game';
 import { usePlayer } from '@/providers/PlayerProvider';
-import { RoomHistory, GameTable, useGenerateGameTable } from '..';
-import { getPlayerSeat, getSeatIds } from './utils';
+import { RoomHistory, useGenerateGameTable } from '..';
+import { getSeatIds } from './utils';
 
 export const useCurrentGame = () => {
   const { player } = usePlayer();
@@ -8,7 +9,7 @@ export const useCurrentGame = () => {
 
   const getCurrentGame = (histories: RoomHistory[]): GameTable | undefined => {
     const currentHistory = histories[0];
-    const playerSeat = getPlayerSeat(player, currentHistory);
+    const playerSeat = getPlayerSeat(player, { ...currentHistory });
     const seatIds = getSeatIds(player, currentHistory, !!playerSeat);
 
     const gameTable = generateGameTable({

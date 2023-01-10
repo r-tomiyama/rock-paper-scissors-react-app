@@ -1,13 +1,5 @@
 import { Player } from '@/providers/PlayerProvider';
-import { RoomHistory, Seat } from '..';
-
-export const getPlayerSeat = (player: Player, gameHistory: RoomHistory): Seat | undefined => {
-  if (player.id === gameHistory.leftUserId) {
-    return 'LEFT';
-  } else if (player.id === gameHistory.rightUserId) {
-    return 'RIGHT';
-  }
-};
+import { RoomHistory } from '..';
 
 export const getSeatIds = (
   player: Player,

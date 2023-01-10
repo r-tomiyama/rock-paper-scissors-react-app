@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
-import { FinishedGameTable, Room } from '@/pages/Room/hooks';
+import { Room } from '@/pages/Room/hooks';
 import { useCreateNextGame, useGameResult } from './hooks';
 import { usePlayer } from '@/providers/PlayerProvider';
 import { GameTable } from '@/sharedComponents';
 import { Alert, AlertIcon, Link, Text } from '@chakra-ui/react';
+import { FinishedGameTable } from '@/domain/game';
 
 type Prop = {
   room: Room;

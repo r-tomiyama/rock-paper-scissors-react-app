@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import { Alert, AlertIcon, Box } from '@chakra-ui/react';
+
+import { Hand, PlayingGameTable } from '@/domain/game';
 import { Room } from '@/pages/Room/hooks';
-import { PlayingGameTable } from '@/pages/Room/hooks';
 import { useSelectHand } from './hooks';
-import { Hand } from '@/services/firestore/types/RoomHistory';
 import { GameTable } from '@/sharedComponents';
 
 type Prop = {

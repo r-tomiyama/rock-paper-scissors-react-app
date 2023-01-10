@@ -1,6 +1,5 @@
+import { Hand } from '@/domain/game';
 import { DocumentData, FirestoreDataConverter, Timestamp } from 'firebase/firestore';
-
-export type Hand = 'ROCK' | 'PAPER' | 'SCISSOR';
 
 export type RoomHistory = {
   leftUserId?: string;

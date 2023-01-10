@@ -1,6 +1,7 @@
 import React from 'react';
-import { Hand } from '@/services/firestore/types/RoomHistory';
 import { Button, Image } from '@chakra-ui/react';
+
+import { Hand } from '@/domain/game';
 
 type Prop = {
   hand: Hand;

@@ -1,21 +1,20 @@
-import { Hand } from '@/services/firestore/types/RoomHistory';
+import { Hand } from './types';
 
-export type Seat = 'LEFT' | 'RIGHT';
-export type Status = 'WAITING' | 'PLAYING' | 'FINISHED';
+type BaseTable = { id: string };
 
-export type PlayingGameTable = isJoinAndPlaying | isWatchingAndPlaying;
-export type FinishedGameTable = isJoinedAndFinished | isWatchingAndFinished;
+export type PlayingGameTable = IsJoinedAndPlaying | IsWatchingAndPlaying;
+export type FinishedGameTable = isJoinedAndFinished | IsWatchingAndFinished;
 
 export type GameTable = WaitingGameTable | PlayingGameTable | FinishedGameTable;
 
-export type WaitingGameTable = {
+export type WaitingGameTable = BaseTable & {
   status: 'WAITING';
   isJoined: boolean;
   leftUserId?: string;
   rightUserId?: string;
 };
 
-type isJoinAndPlaying = {
+export type IsJoinedAndPlaying = BaseTable & {
   status: 'PLAYING';
   isJoined: true;
   leftUserId: string;
@@ -23,7 +22,7 @@ type isJoinAndPlaying = {
   leftHand?: Hand;
 };
 
-type isWatchingAndPlaying = {
+export type IsWatchingAndPlaying = BaseTable & {
   status: 'PLAYING';
   isJoined: false;
   leftUserId: string;
@@ -32,7 +31,7 @@ type isWatchingAndPlaying = {
   rightHand?: Hand;
 };
 
-type isJoinedAndFinished = {
+export type isJoinedAndFinished = BaseTable & {
   status: 'FINISHED';
   isJoined: true;
   leftUserId: string;
@@ -43,7 +42,7 @@ type isJoinedAndFinished = {
   rightHand: Hand;
 };
 
-type isWatchingAndFinished = {
+export type IsWatchingAndFinished = BaseTable & {
   status: 'FINISHED';
   isJoined: false;
   leftUserId: string;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Center, Flex, Text } from '@chakra-ui/react';
 
-import { Hand } from '@/services/firestore/types/RoomHistory';
+import { Hand } from '@/domain/game';
 import { Image } from './parts';
 import { ActionButtons } from './parts/ActionButtons';
 
