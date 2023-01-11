@@ -1,10 +1,9 @@
 import { addDoc } from 'firebase/firestore';
 import useSWRMutation from 'swr/mutation';
+import { Key } from 'swr';
 
 import { roomHistoriesCollection } from '@/services/firestore/firestoreService';
-
-import { Key } from 'swr';
-import { Room } from '@/pages/Room/hooks';
+import { Room } from '@/domain/room';
 
 const fetcher = async (
   _k: string,

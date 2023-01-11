@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Alert, AlertIcon, Box } from '@chakra-ui/react';
 
 import { Hand, PlayingGameTable } from '@/domain/game';
-import { Room } from '@/pages/Room/hooks';
+import { Room } from '@/domain/room';
 import { useSelectHand } from './hooks';
 import { GameTable } from '@/sharedComponents';
 

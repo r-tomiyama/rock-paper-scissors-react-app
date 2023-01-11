@@ -3,6 +3,7 @@ export type {
   Seat,
   Status,
   GameResult,
+  WaitingGameTable,
   PlayingGameTable,
   FinishedGameTable,
   GameTable,
@@ -11,4 +12,5 @@ export type {
   isJoinedAndFinished,
   IsWatchingAndFinished,
 } from './types';
-export { getPlayerSeat } from './functions';
+export { getPlayerSeat, getSeatIds } from './functions';
+export { useGenerateGameTable } from './hooks';

@@ -1,9 +1,9 @@
+import { GameHistory } from '@/domain/gameHistory';
 import { Player } from '@/providers/PlayerProvider';
-import { RoomHistory } from '..';
 
 export const getSeatIds = (
   player: Player,
-  gameHistory: RoomHistory,
+  gameHistory: GameHistory,
   isJoined: boolean,
 ): { leftUserId?: string; rightUserId?: string } => {
   const opponentUserId =

@@ -1,5 +1,5 @@
 import { Player } from '@/providers/PlayerProvider';
-import { Seat } from './types';
+import { Seat } from '../types';
 
 export const getPlayerSeat = (
   player: Player,

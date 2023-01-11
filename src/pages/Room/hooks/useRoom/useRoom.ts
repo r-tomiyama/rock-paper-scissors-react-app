@@ -2,15 +2,10 @@ import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 import { fetcher } from './fetcher';
-import { Room, UpdateRoom } from './types';
 import { subscriber } from './subscriber';
-import { GameTable, useCurrentGame } from '@/pages/Room/hooks';
-
-type Result = {
-  room?: Room;
-  gameTable?: GameTable;
-  isValidating: boolean;
-};
+import { Room } from '@/domain/room';
+import { GameTable } from '@/domain/game';
+import { GameHistory, useCurrentGame } from '@/domain/gameHistory';
 
 export const useRoom = (documentId?: string): Result => {
   const { getCurrentGame } = useCurrentGame();
@@ -47,3 +42,11 @@ export const useRoom = (documentId?: string): Result => {
     isValidating,
   };
 };
+
+type Result = {
+  room?: Room;
+  gameTable?: GameTable;
+  isValidating: boolean;
+};
+
+export type UpdateRoom = (_r: Room, _hs: GameHistory[]) => void;

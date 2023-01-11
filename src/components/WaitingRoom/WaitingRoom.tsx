@@ -1,8 +1,8 @@
 import React from 'react';
 import { Alert, AlertIcon, Box, Center } from '@chakra-ui/react';
 
-import { WaitingGameTable } from '@/domain/game/gameTable';
-import { Room } from '@/pages/Room/hooks';
+import { WaitingGameTable } from '@/domain/game';
+import { Room } from '@/domain/room';
 import { JoinGameForm } from '@/components/JoinGameForm';
 import { GameTable } from '@/sharedComponents';
 
